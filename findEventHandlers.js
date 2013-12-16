@@ -15,7 +15,7 @@ var findEventHandlers = function (eventType, jqSelector) {
 
     var addEventHandlerInfo = function (element, event, $elementsCovered) {
         var extendedEvent = event;
-        if ($elementsCovered !== void 0) {
+        if ($elementsCovered !== void 0 && $elementsCovered !== null) {
             $.extend(extendedEvent, { targets: $elementsCovered.toArray() });
         }
         var eventInfo;
@@ -31,7 +31,7 @@ var findEventHandlers = function (eventType, jqSelector) {
             results.push(eventInfo);
         } else {
             eventInfo = eventsInfo[0];
-            eventInfo.events.push(extendedEvent)
+            eventInfo.events.push(extendedEvent);
         }
     };
 
