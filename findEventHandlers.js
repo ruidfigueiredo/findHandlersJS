@@ -36,7 +36,7 @@ var findEventHandlers = function (eventType, jqSelector) {
     };
 
 
-    var $elementsToWatch = $(jqSelector);
+    var $elementsToWatch = $(jqSelector).add(document);
     var $allElements = $("*").add(document);
 
     $.each($allElements, function (elementIndex, element) {
