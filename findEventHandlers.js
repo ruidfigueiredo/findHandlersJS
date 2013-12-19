@@ -36,7 +36,9 @@ var findEventHandlers = function (eventType, jqSelector) {
     };
 
 
-    var $elementsToWatch = $(jqSelector).add(document);
+    var $elementsToWatch = $(jqSelector);
+    if (jqSelector === "*")//* does not include document and we might be interested in handlers registered there
+        $elementsToWatch = $elementsToWatch.add(document); 
     var $allElements = $("*").add(document);
 
     $.each($allElements, function (elementIndex, element) {
