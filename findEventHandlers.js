@@ -1,5 +1,4 @@
-﻿///<reference path="jquery-2.0.3.js"/>
-var findEventHandlers = function (eventType, jqSelector) {
+﻿var findEventHandlers = function (eventType, jqSelector) {
     var results = [];
 
     var arrayIntersection = function (array1, array2) {
