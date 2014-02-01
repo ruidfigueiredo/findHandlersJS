@@ -1,5 +1,6 @@
 ﻿var findEventHandlers = function (eventType, jqSelector) {
     var results = [];
+    var $ = jQuery;// to avoid conflict between others frameworks like Mootools
 
     var arrayIntersection = function (array1, array2) {
         return $(array1).filter(function (index, element) {
