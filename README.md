@@ -25,3 +25,5 @@ For example, if div#myDiv has a delegate handler with the selector :button and t
 }] 
 
 If you are using the console on Chrome, you can right click the handler, click show function definition and add  breakpoints to debug the handlers.
+
+More info [here](http://www.blinkingcaret.com/2014/01/17/quickly-finding-and-debugging-jquery-event-handlers/)
