@@ -41,23 +41,35 @@
         $elementsToWatch = $elementsToWatch.add(document); 
     var $allElements = $("*").add(document);
 
-    $.each($allElements, function (elementIndex, element) {
-        var allElementEvents = $._data(element, "events");
-        if (allElementEvents !== void 0 && allElementEvents[eventType] !== void 0) {
-            var eventContainer = allElementEvents[eventType];
-            $.each(eventContainer, function(eventIndex, event){
-                var isDelegateEvent = event.selector !== void 0 && event.selector !== null;
-                var $elementsCovered;
-                if (isDelegateEvent) {
-                    $elementsCovered = $(event.selector, element); //only look at children of the element, since those are the only ones the handler covers
-                } else {
-                    $elementsCovered = $(element); //just itself
-                }
-                if (haveCommonElements($elementsCovered, $elementsToWatch)) {
-                    addEventHandlerInfo(element, event, $elementsCovered);
-                }
-            });
-        }
+    if(eventType == "*"){
+        allEventTypes = [
+            "click", "dblclick", "hover", "mousedown", "mouseenter", "mouseleave", "mousemove", "mouseout", "mouseover", "mouseup", "toggle", //mouse events
+            "keydown", "keypress", "keyup", //keyboard events
+            "blur", "change", "focus", "focusin", "focusout", "select", "submit", //form events
+            "error", "load", "ready", "resize", "scroll", "unload" //document/window events
+        ];
+    }
+    else allEventTypes = [eventType];
+    
+    $.each(allEventTypes, function(eventIndex, eventType){
+        $.each($allElements, function (elementIndex, element) {
+            var allElementEvents = $._data(element, "events");
+            if (allElementEvents !== void 0 && allElementEvents[eventType] !== void 0) {
+                var eventContainer = allElementEvents[eventType];
+                $.each(eventContainer, function(eventIndex, event){
+                    var isDelegateEvent = event.selector !== void 0 && event.selector !== null;
+                    var $elementsCovered;
+                    if (isDelegateEvent) {
+                        $elementsCovered = $(event.selector, element); //only look at children of the element, since those are the only ones the handler covers
+                    } else {
+                        $elementsCovered = $(element); //just itself
+                    }
+                    if (haveCommonElements($elementsCovered, $elementsToWatch)) {
+                        addEventHandlerInfo(element, event, $elementsCovered);
+                    }
+                });
+            }
+        });
     });
 
     return results;
